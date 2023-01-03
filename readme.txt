@@ -3,7 +3,7 @@ Contributors: boogah
 Donate link: http://paypal.me/boogah
 Tags: login, cookies, profile
 Requires at least: 6.0
-Tested up to: 6.1.1
+Tested up to: 6.1
 Stable tag: 2.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
