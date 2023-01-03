@@ -8,18 +8,18 @@
  *
  * @package Biscotti
  * @author  Jason Cosper <boogah@gmail.com>
- * @license http://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
+ * @license https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  * @link    https://github.com/boogah/biscotti
  *
  * @wordpress-plugin
  * Plugin Name:       Biscotti
  * Plugin URI:        https://github.com/boogah/biscotti
- * Description:       Biscotti makes your login cookie a little bit longer.
+ * Description:       Biscotti makes your user's login cookie a little bit longer.
  * Version:           2.0.0
  * Author:            Jason Cosper
  * Author URI:        https://jasoncosper.com/
  * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 // If this file is called directly, abort.
@@ -27,9 +27,9 @@ if (! defined('WPINC') ) {
     die;
 }
 
+// Add a dropdown menu to the user profile page that allows you to choose the login cookie's expiration date.
 function biscotti_login_cookie_expiration_form_fields( $user )
 {
-    // Add a dropdown menu to the user profile page that allows you to choose the login cookie's expiration date.
     $expiration_options = array(
     '3 months' => '3 months',
     '6 months' => '6 months',
@@ -54,9 +54,12 @@ function biscotti_login_cookie_expiration_form_fields( $user )
   </table>
     <?php
 }
+
+// Add the form fields to the user profile page.
 add_action('show_user_profile', 'biscotti_login_cookie_expiration_form_fields');
 add_action('edit_user_profile', 'biscotti_login_cookie_expiration_form_fields');
 
+// Update the user meta with the chosen login cookie expiration date.
 function biscotti_login_cookie_expiration_form_fields_update( $user_id )
 {
     if (! current_user_can('edit_user', $user_id) ) {
@@ -64,9 +67,12 @@ function biscotti_login_cookie_expiration_form_fields_update( $user_id )
     }
     update_user_meta($user_id, 'biscotti_login_cookie_expiration', $_POST['biscotti_login_cookie_expiration']);
 }
+
+// Save the chosen login cookie expiration date when the user profile is updated.
 add_action('personal_options_update', 'biscotti_login_cookie_expiration_form_fields_update');
 add_action('edit_user_profile_update', 'biscotti_login_cookie_expiration_form_fields_update');
 
+// Modify the expiration of the logged in user cookie.
 function biscotti_login_cookie_expiration_set_auth_cookie( $auth_cookie_data )
 {
     $user_id = $auth_cookie_data[0];
@@ -74,17 +80,18 @@ function biscotti_login_cookie_expiration_set_auth_cookie( $auth_cookie_data )
 
     if (! empty($expiration_time) ) {
         if ($expiration_time == '3 months' ) {
-            $expiration = 90 * DAY_IN_SECONDS; // 3 months
+            $expiration = 90 * DAY_IN_SECONDS; // Set expiration to 3 months.
         } elseif ($expiration_time == '6 months' ) {
-            $expiration = 180 * DAY_IN_SECONDS; // 6 months
+            $expiration = 180 * DAY_IN_SECONDS; // Set expiration to 6 months
         } elseif ($expiration_time == '1 year' ) {
-            $expiration = 365 * DAY_IN_SECONDS; // 1 year
+            $expiration = 365 * DAY_IN_SECONDS; // Set expiration to 1 year.
         } else {
-            $expiration = ''; // use default expiration
+            $expiration = ''; // Use default expiration of 14 days.
         }
         $auth_cookie_data[2] = $expiration;
     }
-
     return $auth_cookie_data;
 }
+
+// Modify the expiration of the logged in user cookie when a user logs into the site.
 add_filter('auth_cookie_expiration', 'biscotti_login_cookie_expiration_set_auth_cookie', 10, 3);
