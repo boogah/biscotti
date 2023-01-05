@@ -18,6 +18,10 @@ Enjoy your long cookie!
 
 ## Changelog
 
+### 2.0.1
+
+Forgot to escape the lone `$_POST` in my code. Feel dumb about it. Fixed now tho.
+
 ### 2.0.0
 
 Rewrite! Now, instead of forcing *everyone* to use the same login cookie expiration, Biscotti allows users to individually select their login cookie expiration on their profile page.
