@@ -67,7 +67,7 @@ function biscotti_login_cookie_expiration_form_fields_update( $user_id )
     if (! current_user_can('edit_user', $user_id) ) {
         return;
     }
-    update_user_meta($user_id, 'biscotti_login_cookie_expiration', $_POST['biscotti_login_cookie_expiration']);
+    update_user_meta($user_id, 'biscotti_login_cookie_expiration', esc_attr($_POST['biscotti_login_cookie_expiration']));
 }
 
 // Save the chosen login cookie expiration date when the user profile is updated.
