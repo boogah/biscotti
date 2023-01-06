@@ -3,7 +3,7 @@
  * Biscotti
  *
  * Biscotti is a plugin that modifies the expiration of the logged in user
- * cookie in WordPress to three months, six months, or one year. Because 
+ * cookie in WordPress to three months, six months, or one year. Because
  * some people hate to have to keep entering their passwords.
  *
  * @package Biscotti
@@ -67,7 +67,7 @@ function biscotti_login_cookie_expiration_form_fields_update( $user_id )
     if (! current_user_can('edit_user', $user_id) ) {
         return;
     }
-    update_user_meta($user_id, 'biscotti_login_cookie_expiration', esc_attr($_POST['biscotti_login_cookie_expiration']));
+    update_user_meta($user_id, 'biscotti_login_cookie_expiration', sanitize_text_field($_POST['biscotti_login_cookie_expiration']));
 }
 
 // Save the chosen login cookie expiration date when the user profile is updated.
