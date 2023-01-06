@@ -15,7 +15,7 @@
  * Plugin Name:       Biscotti
  * Plugin URI:        https://github.com/boogah/biscotti
  * Description:       Biscotti makes your user's login cookie a little bit longer.
- * Version:           2.0.0
+ * Version:           2.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Jason Cosper

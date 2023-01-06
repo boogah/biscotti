@@ -31,6 +31,10 @@ Enjoy your long cookie!
 
 == Changelog ==
 
+= 2.0.2 =
+
+Sanitize. Not escape. Ack!
+
 = 2.0.1 =
 
 Forgot to escape the lone `$_POST` in my code. Feel dumb about it. Fixed now tho.
