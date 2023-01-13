@@ -18,6 +18,10 @@ Enjoy your long cookie!
 
 ## Changelog
 
+### 2.0.3
+
+@webaware has decided to help make this code less awful and submitted a pull request. This release implements their improvements.
+
 ### 2.0.2
 
 Sanitize. Not escape. Ack!
