@@ -81,7 +81,7 @@ add_action('edit_user_profile_update', 'biscotti_login_cookie_expiration_form_fi
  * @param bool $remember
  * @return int
  */
-function biscotti_login_cookie_expiration_set_auth_cookie(  int $expiration, int $user_id, bool $remember )
+function biscotti_login_cookie_expiration_set_auth_cookie( $expiration, $user_id, $remember )
 {
     $expiration_time = get_user_meta($user_id, 'biscotti_login_cookie_expiration', true);
 
