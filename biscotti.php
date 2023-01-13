@@ -74,10 +74,15 @@ function biscotti_login_cookie_expiration_form_fields_update( $user_id )
 add_action('personal_options_update', 'biscotti_login_cookie_expiration_form_fields_update');
 add_action('edit_user_profile_update', 'biscotti_login_cookie_expiration_form_fields_update');
 
-// Modify the expiration of the logged in user cookie.
-function biscotti_login_cookie_expiration_set_auth_cookie( $auth_cookie_data )
+/**
+ * Modify the expiration of the logged in user cookie.
+ * @param int $expiration
+ * @param int $user_id
+ * @param bool $remember
+ * @return int
+ */
+function biscotti_login_cookie_expiration_set_auth_cookie(  int $expiration, int $user_id, bool $remember )
 {
-    $user_id = $auth_cookie_data[0];
     $expiration_time = get_user_meta($user_id, 'biscotti_login_cookie_expiration', true);
 
     if (! empty($expiration_time) ) {
@@ -90,9 +95,8 @@ function biscotti_login_cookie_expiration_set_auth_cookie( $auth_cookie_data )
         } else {
             $expiration = ''; // Use default expiration of 14 days.
         }
-        $auth_cookie_data[2] = $expiration;
     }
-    return $auth_cookie_data;
+    return $expiration;
 }
 
 // Modify the expiration of the logged in user cookie when a user logs into the site.
