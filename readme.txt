@@ -1,10 +1,10 @@
 === Biscotti ===
-Contributors: boogah
+Contributors: boogah, webaware
 Donate link: http://paypal.me/boogah
 Tags: login, cookies, profile
 Requires at least: 6.0
 Tested up to: 6.1
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -30,6 +30,10 @@ After updating this setting, you *will* need to log out and back into WordPress 
 Enjoy your long cookie!
 
 == Changelog ==
+
+= 2.0.2 =
+
+@webaware has decided to help make this code less awful and submitted a pull request on GitHub. This release implements their improvements.
 
 = 2.0.2 =
 
