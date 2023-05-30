@@ -16,7 +16,56 @@ After updating this setting, you *will* need to log out and back into WordPress 
 
 Enjoy your long cookie!
 
+## WP-CLI Command
+
+As of version 2.1.0, Biscotti includes WP-CLI commands for managing a user's logged in session cookie expiration.
+
+### `biscotti get`
+
+This command returns the previously defined cookie expiration of a user.
+
+#### Options
+
+`<user_id>` — The ID of the user. 
+
+#### Examples
+
+To get the logged in session cookie expiration of a user with the ID of 123, you would use:
+
+```bash
+wp biscotti get 123
+```
+
+### `biscotti set`
+
+This command sets the logged in session cookie expiration of a user.
+
+#### Options
+
+`<user_id>` — ID of the user.
+
+`<expiration>` — New expiration duration. It must be one of the following values:
+* `'3 months'`
+* `'6 months'`
+* `'1 year'`
+
+#### Examples
+
+To set a logged in session cookie expiration of the user with ID 123 to '1 year', you would use:
+
+```bash
+wp biscotti set 123 '1 year'
+```
+
+### Note
+
+Please remember to replace the `user_id` and `expiration` placeholders with the actual user ID and desired expiration duration when running either of these commands.
+
 ## Changelog
+
+### 2.1.0
+
+Added WP-CLI command. Bumped required PHP version to 8.0.
 
 ### 2.0.3
 

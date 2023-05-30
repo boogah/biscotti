@@ -15,13 +15,14 @@
  * Plugin Name:       Biscotti
  * Plugin URI:        https://github.com/boogah/biscotti
  * Description:       Biscotti makes your user's login cookie a little bit longer.
- * Version:           2.0.3
+ * Version:           2.1.0
  * Requires at least: 6.0
- * Requires PHP:      7.4
+ * Requires PHP:      8.0
  * Author:            Jason Cosper
  * Author URI:        https://jasoncosper.com/
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
+ * GitHub Plugin URI: boogah/biscotti
  */
 
 // If this file is called directly, abort.
@@ -35,7 +36,7 @@ function biscotti_login_cookie_expiration_form_fields( $user )
     $expiration_options = array(
     '3 months' => '3 months',
     '6 months' => '6 months',
-    '1 year' => '1 year',
+    '1 year'   => '1 year',
     );
     $selected_expiration = get_the_author_meta('biscotti_login_cookie_expiration', $user->ID);
     ?>
@@ -55,6 +56,64 @@ function biscotti_login_cookie_expiration_form_fields( $user )
     </tr>
   </table>
     <?php
+}
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+
+  /**
+   * Manages a user's logged in session cookie expiration.
+   */
+  class Biscotti_Command {
+
+      /**
+       * Get the logged in session cookie expiration of a user.
+       *
+       * ## OPTIONS
+       *
+       * <user_id>
+       * : ID of the user.
+       *
+       * ## EXAMPLES
+       *
+       *     wp biscotti get 123
+       *
+       */
+      function get( $args ) {
+          list( $user_id ) = $args;
+
+          $expiration = get_user_meta( $user_id, 'biscotti_login_cookie_expiration', true );
+
+          WP_CLI::line( 'Cookie expiration: ' . $expiration );
+      }
+
+      /**
+       * Set the logged in session cookie expiration of a user.
+       *
+       * ## OPTIONS
+       *
+       * <user_id>
+       * : ID of the user.
+       *
+       * <expiration>
+       * : New expiration duration.
+       *
+       * ## EXAMPLES
+       *
+       *     wp biscotti set 123 '1 year'
+       *
+       */
+      function set( $args ) {
+          list( $user_id, $expiration ) = $args;
+
+          update_user_meta( $user_id, 'biscotti_login_cookie_expiration', $expiration );
+
+          WP_CLI::success( 'Updated cookie expiration.' );
+      }
+  }
+
+if ( class_exists( 'WP_CLI' ) ) {
+  WP_CLI::add_command( 'biscotti', 'Biscotti_Command' );
+}
 }
 
 // Add the form fields to the user profile page.
