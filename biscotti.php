@@ -17,7 +17,7 @@
  * Description:       Biscotti makes your user's login cookie a little bit longer.
  * Version:           2.1.0
  * Requires at least: 6.0
- * Requires PHP:      8.0
+ * Requires PHP:      7.4
  * Author:            Jason Cosper
  * Author URI:        https://jasoncosper.com/
  * License:           GPL-2.0+
